@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.AppMapper">
+
+    <!-- 增-->
+    <insert id="add" parameterType="com.test.entity.SysApp">
+        INSERT INTO `demo`.`sys_app`(`ID`, `APP_NAME`, `APP_INTRODUCE`, `APP_VERSION`)
+        VALUES (NULL , #{name}, #{introduce}, #{version});
+    </insert>
+
+    <!-- 查-->
+    <select id="list" resultType="com.test.entity.SysApp">
+        SELECT
+         ID             AS id,
+         APP_NAME       AS name,
+         APP_INTRODUCE  AS introduce,
+         APP_VERSION    AS version
+        FROM sys_app
+    </select>
+
+    <!-- 查id是否存在-->
+    <select id="selectId" resultType="int">
+        select count(*) from sys_app where ID=#{id2}
+    </select>
+
+    <!-- 删-->
+    <select id="delete" parameterType="com.test.entity.SysApp">
+          delete from sys_app where ID=#{id}
+    </select>
+
+    <!-- 修改-->
+    <update id="update" parameterType="com.test.entity.SysApp">
+          update sys_app set
+         APP_NAME=#{name},
+         APP_INTRODUCE=#{introduce},
+         APP_VERSION=#{version}
+         where ID=#{id}
+    </update>
+</mapper>
